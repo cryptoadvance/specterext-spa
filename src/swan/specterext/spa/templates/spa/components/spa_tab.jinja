@@ -1,0 +1,8 @@
+{% extends "spa/base.jinja" %}
+{% block main %}
+    <img src="{{ url_for(service.id +'_endpoint' + '.static', filename=service.logo) }}" width="300"/>    
+    {% from 'spa/components/spa_menu.jinja' import spa_menu with context %}
+    {{ spa_menu(tab) }}
+    {% block content %}
+    {% endblock %}
+{% endblock %}

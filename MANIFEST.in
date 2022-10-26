@@ -1,0 +1,5 @@
+recursive-include src/swan/specterext/spa/templates *
+recursive-include src/swan/specterext/spa/static *
+recursive-include src/swan/specterext/spa/*/LC_MESSAGES *.mo
+recursive-include src/swan/specterext/spa/translations/*/LC_MESSAGES *.po
+include requirements.txt
