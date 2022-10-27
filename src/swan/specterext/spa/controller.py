@@ -1,4 +1,5 @@
 import logging
+import os
 from flask import redirect, render_template, request, url_for, flash
 from flask import current_app as app
 from flask_login import login_required, current_user
@@ -8,6 +9,7 @@ from cryptoadvance.specter.services.controller import user_secret_decrypted_requ
 from cryptoadvance.specter.user import User
 from cryptoadvance.specter.wallet import Wallet
 from .service import SpaService
+from flask import send_from_directory
 
 
 logger = logging.getLogger(__name__)
@@ -30,6 +32,11 @@ def index():
         "spa/index.jinja",
     )
 
+@spa_endpoint.route("/app/<path:path>")
+def react_app(path):
+    print(os.getcwd())
+    print(os.path.join(os.getcwd(), 'build'))
+    return send_from_directory(os.path.join(os.getcwd(), 'build'), path)
 
 
 @spa_endpoint.route("/transactions")
