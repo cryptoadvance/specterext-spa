@@ -10,11 +10,13 @@ from cryptoadvance.specter.user import User
 from cryptoadvance.specter.wallet import Wallet
 from .service import SpaService
 from flask import send_from_directory
-
+from graphql_server.flask import GraphQLView
+import graphene
 
 logger = logging.getLogger(__name__)
 
 spa_endpoint = SpaService.blueprint
+app.csrf.exempt(spa_endpoint)
 
 def ext() -> SpaService:
     ''' convenience for getting the extension-object'''
@@ -23,6 +25,32 @@ def ext() -> SpaService:
 def specter() -> Specter:
     ''' convenience for getting the specter-object'''
     return app.specter
+
+
+
+
+class Query(graphene.ObjectType):
+    hello = graphene.String(description='A typical hello world')
+
+    def resolve_hello(self, info):
+        return 'World'
+
+schema = graphene.Schema(query=Query)
+
+spa_endpoint.add_url_rule('/graphql', view_func=GraphQLView.as_view(
+    'graphql',
+    schema=schema,
+    graphiql=True,
+))
+
+# Optional, for adding batch query support (used in Apollo-Client)
+spa_endpoint.add_url_rule('/graphql/batch', view_func=GraphQLView.as_view(
+    'graphql',
+    schema=schema,
+    batch=True
+))
+
+
 
 
 @spa_endpoint.route("/")
