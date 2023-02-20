@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "react-app-rewired build --template public/index.html",
     "postbuild": "echo running postbuild",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
@@ -37,5 +37,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0"
   }
 }

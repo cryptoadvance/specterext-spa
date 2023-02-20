@@ -27,34 +27,7 @@ def specter() -> Specter:
     return app.specter
 
 
-
-
-class Query(graphene.ObjectType):
-    hello = graphene.String(description='A typical hello world')
-
-    def resolve_hello(self, info):
-        return 'World'
-
-schema = graphene.Schema(query=Query)
-
-spa_endpoint.add_url_rule('/graphql', view_func=GraphQLView.as_view(
-    'graphql',
-    schema=schema,
-    graphiql=True,
-))
-
-# Optional, for adding batch query support (used in Apollo-Client)
-spa_endpoint.add_url_rule('/graphql/batch', view_func=GraphQLView.as_view(
-    'graphql',
-    schema=schema,
-    batch=True
-))
-
-
-
-
 @spa_endpoint.route("/")
-@login_required
 def index():
     return render_template(
         "spa/index.jinja",
