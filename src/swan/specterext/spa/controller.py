@@ -30,14 +30,14 @@ def specter() -> Specter:
 @spa_endpoint.route("/")
 def index():
     return render_template(
-        "spa/index.jinja",
+        "spa/index_orig.jinja",
     )
 
 @spa_endpoint.route("/app/<path:path>")
 def react_app(path):
     print(os.getcwd())
     print(os.path.join(os.getcwd(), 'build'))
-    return send_from_directory(os.path.join(os.getcwd(), 'build'), path)
+    return send_from_directory(os.path.join(os.getcwd(), 'src/swan/specterext/spa/static/app'), path)
 
 
 @spa_endpoint.route("/transactions")
@@ -55,7 +55,6 @@ def transactions():
 
 @spa_endpoint.route("/settings", methods=["GET"])
 @login_required
-@user_secret_decrypted_required
 def settings_get():
     associated_wallet: Wallet = SpaService.get_associated_wallet()
 

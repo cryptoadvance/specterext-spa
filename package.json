@@ -18,7 +18,7 @@
     "build": "react-app-rewired build --template public/index.html",
     "postbuild": "echo running postbuild",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

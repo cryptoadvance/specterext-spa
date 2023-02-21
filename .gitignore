@@ -9,3 +9,4 @@ btcd-conn.json
 elmd-conn.json
 prevent_mining
 build
+src/swan/specterext/spa/static/app
